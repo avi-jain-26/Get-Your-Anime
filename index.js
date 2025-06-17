@@ -35,5 +35,5 @@ app.get("/search", async (req,res)=>{
     const id=  req.params.id;
     const response = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
     const choosenanime = await response.json();
-    res.render('choosen', { choosenanime: choosenanime.data });
+    res.render("choosen.ejs", { choosenanime: choosenanime.data });
  });
