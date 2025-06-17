@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Results</title>
+    <link rel="icon" href="/image.png">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <form  action="/search" method="GET">
+    <input id="inp" type="text" name="q" placeholder="Enter anime name..." required>
+    <button id="btn" type="submit">Search</button>
+  </form>
+   <h1 id="searchres" style="color: aliceblue;">Search Results for "<%= query %>"</h1>
+  <div class="card-container">
+    <% anime.data.forEach(anime => { %>
+      <div class="anime-card">
+        <img src="<%= anime.images.jpg.image_url %>" alt="<%= anime.title %>">
+        <h3><%= anime.title %></h3>
+        <p class="anime-score">Rating: <%= anime.score %>/10</p>
+        <p><%= anime.synopsis ? anime.synopsis.substring(0, 100) + '...' : 'No synopsis available.' %></p>
+        <a id="viewdet" href="/anime/<%= anime.mal_id %>">View Details</a>
+      </div>
+    <% }) %>
+  </div>
+</body>
+</html>

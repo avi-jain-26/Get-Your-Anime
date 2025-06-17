@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime Suggestion</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="/image.png">
+ 
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #84848a;
+    }
+
+    h1 {
+      text-align: center;
+    }
+     
+
+   
+
+    .carousel-container {
+      position: relative;
+      width: 95%;
+      max-width: 1000px;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-card {
+  width: 100%;
+  max-width: 350px;
+  margin: 10px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+
+    .carousel-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .carousel-card h3 {
+      margin: 10px 0 5px;
+    }
+
+    .carousel-card p {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .carousel-card a {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: crimson;
+      font-weight: bold;
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: crimson;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 18px;
+      z-index: 2;
+    }
+
+    .carousel-btn.left {
+      left: 10px;
+    }
+
+    .carousel-btn.right {
+      right: 10px;
+    }
+
+  
+    @media (max-width: 480px) {
+  .carousel-container {
+    width: 100%;
+  }
+
+  .carousel-track {
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .carousel-card {
+    width: 90%;
+    min-width: auto;
+    margin: 0 auto;
+  }
+
+  .carousel-btn {
+    padding: 6px 8px;
+    font-size: 14px;
+    top: 45%;
+  }
+
+  h1 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .carousel-card h3 {
+    font-size: 16px;
+  }
+
+  .carousel-card p {
+    font-size: 12px;
+  }
+
+  a {
+    font-size: 10px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <h1 id="indexheading" style="color: rgb(240, 236, 236); -webkit-text-stroke: 1px #000000; font-weight: 899;">⛩️ Anime Paglu <Strong style="color: antiquewhite; -webkit-text-stroke: 0px white">☯</strong></h1>
+
+  <form id="indexform" action="/search" method="GET">
+    <input id="inp" type="text" name="q" placeholder="Enter anime name..." required>
+    <button id="btn" type="submit">Search</button>
+  </form>
+
+  <h1 style="color: rgb(255, 255, 255); -webkit-text-stroke: 1px #000000; font-weight: 899;">Some Featured Anime</h1>
+
+  <div class="carousel-container">
+    <button class="carousel-btn left" onclick="moveSlide(-1)">❮</button>
+    <div class="carousel-track" id="carouselTrack">
+      <% anime.data.forEach(anime => { %>
+        <div class="carousel-card">
+          <img src="<%= anime.images.jpg.image_url %>" alt="<%= anime.title %>" />
+          <h3><%= anime.title %></h3>
+          <p>⭐ <%= anime.score %></p>
+          <a href="https://aniplaynow.live/catalog?search=<%= anime.title %>">CLICK HERE TO WATCH</a>
+        </div>
+      <% }) %>
+    </div>
+    <button class="carousel-btn right" onclick="moveSlide(1)">❯</button>
+  </div>
+
+  <p style="color: antiquewhite; font-size: 10px; bottom: 10px;">Made with ☯ by @<u>Avi Jain</u></p>
+
+  <script>
+    const track = document.getElementById('carouselTrack');
+    let index = 0;
+
+    function getCardWidth() {
+      const card = track.querySelector('.carousel-card');
+      return card ? card.offsetWidth + 20 : 320; // 20 for margin
+    }
+
+    function moveSlide(direction) {
+      const cardWidth = getCardWidth();
+      const totalCards = track.children.length;
+      const maxIndex = totalCards - Math.floor(track.offsetWidth / cardWidth);
+
+      index += direction;
+      if (index < 0) index = 0;
+      if (index > maxIndex) index = maxIndex;
+
+      track.style.transform = `translateX(-${index * cardWidth}px)`;
+    }
+
+    window.addEventListener('resize', () => {
+      moveSlide(0); // Adjust on resize
+    });
+  </script>
+</body>
+</html>

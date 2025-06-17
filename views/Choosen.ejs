@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top choosenanime</title>
+<link rel="icon" href="/image.png">
+<style>
+    body{
+        background-color: rgba(11, 11, 28, 0.687);
+    }
+    .anime-detail-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        }
+
+        .anime-detail-container img {
+        max-width: 100%;
+        border-radius: 10px;
+        }
+
+        .anime-detail-container h1 {
+        margin-top: 10px;
+        }
+
+         .anime-detail-container a{
+            text-decoration: none;
+            font-weight: 800;
+            color: rgb(225, 27, 27);
+            font-size: 20px;
+         }
+        
+</style>
+</head>
+<body>
+    <div class="anime-detail-container">
+    <a href="/">&#8592;Back</a>
+    <br><br>
+
+    <img src="<%= choosenanime.images.jpg.image_url %>" alt="<%= choosenanime.title %>" />
+    <h1><%= choosenanime.title %></h1>
+    <p><strong>Score:</strong> <%= choosenanime.score %></p>
+    <p><strong>Episodes:</strong> <%= choosenanime.episodes %></p>
+    <p><strong>Duration:</strong> <%= choosenanime.duration %></p>
+    <p><strong>Synopsis:</strong> <%= choosenanime.synopsis %></p>
+    <p><strong>Studios:</strong> 
+      <%= choosenanime.studios.map(studio => studio.name).join(', ') %>
+      <br><br>
+       <a href="https://aniplaynow.live/catalog?search=<%= choosenanime.title %>"> CLICK HERE TO WATCH NOW ON ANIPLAY</a>
+    </p>
+  </div>
+</body>
+</html>
