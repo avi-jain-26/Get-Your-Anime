@@ -8,6 +8,7 @@ app.listen(port, (req)=>{
 });
 
 app.set("view engine", "ejs");
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
