@@ -33,9 +33,44 @@ app.get("/search", async (req,res)=>{
    }
  });
 
- app.get("/anime/:id", async (req,res)=>{
-    const id=  req.params.id;
-    const response = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
-    const data = await response.json();
-    res.render("choosen.ejs", { choosenanime: data.data });
- });
+ // app.get("/anime/:id", async (req,res)=>{
+ //    const id=  req.params.id;
+ //    const response = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
+ //    const data = await response.json();
+ //    res.render("choosen.ejs", { choosenanime: data.data });
+ // });
+
+app.get("/anime/:id", async (req, res) => {
+    const id = req.params.id;
+    
+    // Debug: Log the ID to see what we're getting
+    console.log("Anime ID received:", id);
+    
+    try {
+        const apiUrl = `https://api.jikan.moe/v4/anime/${id}`;
+        console.log("API URL:", apiUrl);
+        
+        const response = await fetch(apiUrl);
+        
+        // Check if the response is okay
+        if (!response.ok) {
+            console.log("API Response Status:", response.status);
+            return res.status(404).send("Anime not found");
+        }
+        
+        const data = await response.json();
+        console.log("API Response received:", data);
+        
+        // Check if data exists
+        if (!data.data) {
+            console.log("No anime data found");
+            return res.status(404).send("Anime not found");
+        }
+        
+        res.render('choosen', { choosenanime: data.data });
+        
+    } catch(error) {
+        console.error("Error fetching anime:", error);
+        res.status(500).send("Something went wrong: " + error.message);
+    }
+});
