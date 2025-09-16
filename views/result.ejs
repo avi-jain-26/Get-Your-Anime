@@ -20,9 +20,12 @@
         <h3><%= anime.title %></h3>
         <p class="anime-score">Rating: <%= anime.score %>/10</p>
         <p><%= anime.synopsis ? anime.synopsis.substring(0, 100) + '...' : 'No synopsis available.' %></p>
-        <a id="viewdet" href="/anime/<%= anime.mal_id %>">View Details</a>
+        <form action="/anime/<%= anime.mal_id %>" method="GET" style="display: inline;">
+    <button type="submit" id="viewdet">View Details</button>
+</form>
       </div>
     <% }) %>
   </div>
 </body>
+
 </html>
