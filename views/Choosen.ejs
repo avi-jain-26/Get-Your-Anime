@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Top choosenanime</title>
+<title>Your anime</title>
 <link rel="icon" href="/image.png">
 <style>
     body{
@@ -47,6 +47,9 @@
     <p><strong>Duration:</strong> <%= choosenanime.duration %></p>
     <p><strong>Synopsis:</strong> <%= choosenanime.synopsis %></p>
     <p><strong>Studios:</strong> 
+      <%= choosenanime.studios.map(studio => studio.name).join(', ') %>
+      <br><br>
+       <a href="https://hianime.to/search?keyword=<%= choosenanime.title %>"> CLICK HERE TO WATCH NOW ON ANIPLAY</a>
     </p>
   </div>
 </body>
